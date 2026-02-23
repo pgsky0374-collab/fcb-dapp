@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>FCB · 自由之城</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(1200px 600px at 50% -100px,#111827,#0b101a);
+    background-attachment:fixed;
+    color:#e2e8f0;
+    min-height:100vh;
+    padding:16px;
+    line-height:1.35;
+}
+.container{max-width:460px;margin:0 auto}
+
+/* 头部逼格 */
+.header{
+    text-align:center;
+    padding:30px 0 20px;
+}
+.header h1{
+    font-size:28px;
+    font-weight:700;
+    background:linear-gradient(90deg,#38bdf8,#4ade80);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    letter-spacing:1px;
+}
+.header p{
+    color:#94a3b8;
+    font-size:14px;
+    margin-top:6px;
+}
+
+/* 高端卡片 */
+.card{
+    background:rgba(17,24,39,0.7);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:16px;
+    border:1px solid rgba(255,255,255,0.06);
+    box-shadow:0 8px 30px rgba(0,0,0,0.2);
+    overflow:hidden;
+    position:relative;
+}
+.card::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(56,189,248,0.3),transparent);
+}
+.card-title{
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:18px;
+    color:#f1f5f9;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+.card-title::before{
+    content:'';
+    width:4px;height:16px;
+    background:linear-gradient(#38bdf8,#4ade80);
+    border-radius:2px;
+}
+
+/* 按钮 */
+.btn{
+    width:100%;height:50px;
+    border-radius:14px;
+    border:none;
+    font-size:15px;
+    font-weight:600;
+    color:#fff;
+    cursor:pointer;
+    transition:all 0.25s ease;
+    position:relative;
+    overflow:hidden;
+}
+.btn::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(255,255,255,0.04),rgba(255,255,255,0.1));
+    opacity:0;transition:0.2s;
+}
+.btn:hover::after{opacity:1}
+.btn-primary{
+    background:linear-gradient(90deg,#2563eb,#38bdf8);
+    box-shadow:0 6px 20px -6px rgba(37,99,235,0.35);
+}
+.btn-success{
+    background:linear-gradient(90deg,#10b981,#4ade80);
+    box-shadow:0 6px 20px -6px rgba(16,185,129,0.35);
+}
+.btn-danger{
+    background:linear-gradient(90deg,#ef4444,#f87171);
+    box-shadow:0 6px 20px -6px rgba(239,68,68,0.3);
+}
+.btn-outline{
+    background:rgba(30,41,59,0.6);
+    border:1px solid rgba(255,255,255,0.08);
+    color:#e2e8f0;
+}
+
+/* 双按钮行 */
+.btn-row{
+    display:flex;gap:12px;margin-top:14px;
+}
+.btn-row .btn{flex:1;margin-top:0}
+
+/* 行样式 */
+.row{
+    display:flex;justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.row:last-child{border-bottom:none}
+.label{color:#94a3b8;font-size:14px}
+.value{font-weight:600;color:#f1f5f9}
+
+/* 输入框 */
+.input{
+    width:100%;height:50px;
+    background:rgba(15,23,42,0.6);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:14px;
+    padding:0 18px;
+    color:#f1f5f9;
+    outline:none;
+    font-size:15px;
+    margin-bottom:10px;
+}
+.input::placeholder{color:#64748b}
+
+/* 提示文字 */
+.status{
+    font-size:13px;
+    margin-top:12px;
+    color:#4ade80;
+    text-align:center;
+}
+.status.err{color:#f87171}
+
+/* 模块标题 */
+.section{
+    font-size:18px;
+    font-weight:600;
+    margin:30px 0 12px 10px;
+    color:#e2e8f0;
+}
+
+/* 商城网格 */
+.grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px
+}
+.item{
+    background:rgba(30,41,59,0.4);
+    border-radius:16px;
+    padding:16px 10px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.05);
+    transition:0.2s;
+}
+.item:hover{transform:translateY(-2px);border-color:rgba(56,189,248,0.2)}
+.item h4{
+    font-size:15px;font-weight:600;margin-bottom:6px;color:#f1f5f9
+}
+.item p{
+    font-size:13px;color:#94a3b8;margin-bottom:10px
+}
+.item .btn{
+    height:38px;font-size:13px;border-radius:10px
+}
+
+/* 底部版权 */
+.copyright{
+    text-align:center;
+    color:#64748b;
+    font-size:12px;
+    padding:30px 0 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>FCB · 自由之城</h1>
+    <p>实体赋能 · 质押分红 · 生态商城</p>
+  </div>
+
+  <!-- 钱包 -->
+  <div class="card">
+    <div class="card-title">钱包连接</div>
+    <button class="btn btn-primary" id="connect">连接 TP 钱包</button>
+    <div id="walletStatus" class="status">未连接</div>
+  </div>
+
+  <!-- 资产概览 -->
+  <div class="card">
+    <div class="card-title">资产概览</div>
+    <div class="row">
+      <div class="label">FCB 余额</div>
+      <div class="value" id="fcbBalance">0.0000</div>
+    </div>
+    <div class="row">
+      <div class="label">我的等级</div>
+      <div class="value" id="userLevel">—</div>
+    </div>
+    <button class="btn btn-outline" id="refresh">刷新数据</button>
+  </div>
+
+  <!-- 质押中心 -->
+  <div class="section">质押中心</div>
+  <div class="card">
+    <div class="card-title">我的质押</div>
+    <div class="row">
+      <div class="label">质押中 FCB</div>
+      <div class="value" id="stakedAmount">0.0000</div>
+    </div>
+    <input class="input" id="stakeAmt" placeholder="质押数量" type="number">
+    <input class="input" id="unstakeAmt" placeholder="解质押数量" type="number">
+    <div class="btn-row">
+      <button class="btn btn-primary" id="stakeBtn">质押</button>
+      <button class="btn btn-danger" id="unstakeBtn">解质押</button>
+    </div>
+    <div id="stakeTip" class="status"></div>
+  </div>
+
+  <!-- 分红中心 -->
+  <div class="section">分红中心</div>
+  <div class="card">
+    <div class="card-title">分红数据</div>
+    <div class="row"><label class="label">总分红池</label><label class="value" id="poolTotal">0 USDT</label></div>
+    <div class="row"><label class="label">分红地址数</label><label class="value" id="divAddrCount">0</label></div>
+    <div class="row"><label class="label">我的分红权重</label><label class="value" id="userWeight">0</label></div>
+    <div class="row"><label class="label">已领分红</label><label class="value" id="claimed">0 USDT</label></div>
+    <div class="row"><label class="label">可领分红</label><label class="value" id="claimable">0 USDT</label></div>
+    <div class="row"><label class="label">未领分红</label><label class="value" id="unclaimed">0 USDT</label></div>
+    <button class="btn btn-success" id="claimDividend">领取 USDT 分红</button>
+    <div id="claimTip" class="status"></div>
+  </div>
+
+  <!-- 我的团队 -->
+  <div class="section">我的团队</div>
+  <div class="card">
+    <div class="card-title">团队信息</div>
+    <div class="row"><label class="label">我的等级</label><label class="value" id="teamLevel">—</label></div>
+    <div class="row"><label class="label">我的推荐人</label><label class="value" id="myReferrer">无</label></div>
+    <div class="row"><label class="label">直推人数</label><label class="value" id="directCount">0</label></div>
+    <div class="row"><label class="label">团队总人数</label><label class="value" id="teamTotal">0</label></div>
+    <input class="input" id="refLink" readonly placeholder="推荐链接">
+    <button class="btn btn-outline" id="copyRef">复制推荐链接</button>
+    <input class="input" id="refInput" placeholder="输入推荐人地址">
+    <button class="btn btn-outline" id="setRefBtn">绑定推荐人</button>
+  </div>
+
+  <!-- 商城 -->
+  <div class="section">精酿商城</div>
+  <div class="card">
+    <div class="card-title">FCB 支付商城</div>
+    <div class="grid">
+      <div class="item">
+        <h4>1罐</h4>
+        <p>3 USDT</p>
+        <button class="btn btn-primary" onclick="buy(1)">购买</button>
+      </div>
+      <div class="item">
+        <h4>6罐</h4>
+        <p>16 USDT</p>
+        <button class="btn btn-primary" onclick="buy(2)">购买</button>
+      </div>
+      <div class="item">
+        <h4>12罐</h4>
+        <p>30 USDT</p>
+        <button class="btn btn-primary" onclick="buy(3)">购买</button>
+      </div>
+    </div>
+    <div id="buyTip" class="status" style="margin-top:16px">按 FCB 实时价格自动支付</div>
+  </div>
+
+  <div class="copyright">FCB © 自由之城 生态平台</div>
+</div>
+
+<script src="https://cdn.ethers.io/lib/ethers-5.7.2.min.js"></script>
+<script>
+const CONFIG = {
+  main:     "0xAa1f6A15B238F9A7Ab0F23540AFC6C14F5381F09",
+  dividend: "0x9c8b70dD10F5d1624dd50Ed81f778eAB629c7918",
+  staking:  "0x4a816A30b990889660c07bc4E6ae72C1a0fE0CBf",
+  merchant: "0x6069A212f4c0f737A688B281cC5eC5bd09e07373"
+};
+
+const MAIN_ABI = [{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint8","name":"typeId","type":"uint8"},{"internalType":"address","name":"merchant","type":"address"}],"name":"buyBeer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"checkLevel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"claimLockReward","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"BEER_1CAN","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"BEER_6CAN","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"BEER_12CAN","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"FCB_USD_PRICE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userInfo","outputs":[{"internalType":"enum FCBToken.Level","name":"level","type":"uint8"},{"internalType":"address","name":"referrer","type":"address"},{"internalType":"uint256","name":"teamUsers","type":"uint256"},{"internalType":"uint256","name":"teamVolume","type":"uint256"},{"internalType":"uint256","name":"weight","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"},{"internalType":"address","name":"referrer","type":"address"}],"name":"setReferrer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"lockRewards","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"unlockTime","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"DIVIDEND_POOL","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"STAKING_CONTRACT","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}];
+const DIVI_ABI = [{"inputs":[{"internalType":"address[]","name":"users","type":"address[]"}],"name":"batchCalculateDividend","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claimDividend","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"distributeDailyDividend","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"emergencyWithdrawUSDT","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"claimableDividend","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"DAY_CYCLE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"fcb","outputs":[{"internalType":"contract IFCBToken","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"FCB_MAIN","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getClaimableDividend","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lastDistributeTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"usdt","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
+const STAK_ABI = [{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"emergencyWithdrawFCB","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"stakeFCB","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"unstakeFCB","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"fcb","outputs":[{"internalType":"contract IFCBToken","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"FCB_MAIN","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"fcbToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getStakedBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"stakedBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}];
+
+let provider, signer, mainC, divC, stakC;
+let currentAddr = "";
+const levelMap = {0:"Invalid",1:"Member",2:"Chief",3:"Manager",4:"Director"};
+
+window.onload = () => {
+  $('#connect').onclick = connect;
+  $('#refresh').onclick = loadAll;
+  $('#stakeBtn').onclick = doStake;
+  $('#unstakeBtn').onclick = doUnstake;
+  $('#claimDividend').onclick = doClaim;
+  $('#setRefBtn').onclick = setReferrer;
+  $('#copyRef').onclick = copyRef;
+}
+
+function $(id){ return document.getElementById(id) }
+function short(a){ return a && a !== "0x0000000000000000000000000000000000000000" ? a.slice(0,6)+'...'+a.slice(-4) : '无' }
+function tip(id,t,isErr){ $('#'+id).innerText = t; $('#'+id).className = isErr ? 'status err' : 'status' }
+
+async function connect(){
+  if(!window.ethereum) return alert('请在 TP 钱包内打开');
+  try {
+    const accounts = await ethereum.request({method:'eth_requestAccounts'});
+    currentAddr = accounts[0];
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+    mainC = new ethers.Contract(CONFIG.main, MAIN_ABI, signer);
+    divC = new ethers.Contract(CONFIG.dividend, DIVI_ABI, signer);
+    stakC = new ethers.Contract(CONFIG.staking, STAK_ABI, signer);
+    $('#walletStatus').innerText = '已连接：'+short(currentAddr);
+    loadAll();
+  } catch(e){
+    $('#walletStatus').innerText = '连接失败';
+  }
+}
+
+async function loadAll(){
+  if(!currentAddr) return;
+  try {
+    const fcb = await mainC.balanceOf(currentAddr);
+    $('#fcbBalance').innerText = ethers.utils.formatEther(fcb).slice(0,8);
+
+    const info = await mainC.userInfo(currentAddr);
+    $('#userLevel').innerText = levelMap[info.level] || '—';
+    $('#teamLevel').innerText = levelMap[info.level] || '—';
+    $('#myReferrer').innerText = short(info.referrer);
+    $('#userWeight').innerText = info.weight.toString();
+    $('#teamTotal').innerText = info.teamUsers.toString();
+
+    const staked = await stakC.getStakedBalance(currentAddr);
+    $('#stakedAmount').innerText = ethers.utils.formatEther(staked).slice(0,8);
+
+    const claimable = await divC.getClaimableDividend(currentAddr);
+    const c = ethers.utils.formatEther(claimable).slice(0,8);
+    $('#claimable').innerText = c + ' USDT';
+    $('#unclaimed').innerText = c + ' USDT';
+    $('#claimed').innerText = '0 USDT';
+
+    $('#directCount').innerText = '0';
+    $('#refLink').value = `https://yourdomain.com?ref=${currentAddr}`;
+  } catch(e){}
+}
+
+async function doStake(){
+  const v = $('#stakeAmt').value;
+  if(!v || v<=0) return tip('stakeTip','请输入质押数量',true);
+  try {
+    tip('stakeTip','授权中...');
+    const ap = await mainC.approve(CONFIG.staking, ethers.utils.parseEther(v));
+    await ap.wait();
+    tip('stakeTip','质押中...');
+    const tx = await stakC.stakeFCB(ethers.utils.parseEther(v));
+    await tx.wait();
+    tip('stakeTip','✅ 质押成功');
+    loadAll();
+    $('#stakeAmt').value = '';
+  } catch(e){
+    tip('stakeTip','❌ 质押失败',true);
+  }
+}
+
+async function doUnstake(){
+  const v = $('#unstakeAmt').value;
+  if(!v || v<=0) return tip('stakeTip','请输入解质押数量',true);
+  try {
+    tip('stakeTip','解质押中...');
+    const tx = await stakC.unstakeFCB(ethers.utils.parseEther(v));
+    await tx.wait();
+    tip('stakeTip','✅ 解质押成功');
+    loadAll();
+    $('#unstakeAmt').value = '';
+  } catch(e){
+    tip('stakeTip','❌ 失败',true);
+  }
+}
+
+async function doClaim(){
+  try {
+    tip('claimTip','领取中...');
+    const tx = await divC.claimDividend();
+    await tx.wait();
+    tip('claimTip','✅ 分红已到账');
+    loadAll();
+  } catch(e){
+    tip('claimTip','❌ 领取失败',true);
+  }
+}
+
+async function setReferrer(){
+  if(!currentAddr) return alert('请先连接钱包');
+  const info = await mainC.userInfo(currentAddr);
+  if(info.referrer && info.referrer !== "0x0000000000000000000000000000000000000000"){
+    return alert('每个地址仅可绑定一次推荐人！');
+  }
+  const ref = $('#refInput').value;
+  if(!ethers.utils.isAddress(ref)) return alert('地址格式错误');
+  try {
+    const tx = await mainC.setReferrer(currentAddr, ref);
+    await tx.wait();
+    alert('绑定成功！');
+    loadAll();
+    $('#refInput').value = '';
+  } catch(e){
+    alert('绑定失败');
+  }
+}
+
+function copyRef(){
+  $('#refLink').select();
+  document.execCommand('copy');
+  alert('推荐链接已复制');
+}
+
+async function buy(type){
+  if(!currentAddr) return alert('请先连接钱包');
+  try {
+    tip('buyTip','支付处理中...');
+    const ap = await mainC.approve(CONFIG.main, ethers.constants.MaxUint256);
+    await ap.wait();
+    const tx = await mainC.buyBeer(type, CONFIG.merchant);
+    await tx.wait();
+    tip('buyTip','✅ 购买成功');
+    loadAll();
+  } catch(e){
+    tip('buyTip','❌ 购买失败',true);
+  }
+}
+</script>
+</body>
+</html>
